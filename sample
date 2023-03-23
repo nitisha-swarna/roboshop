@@ -1,0 +1,60 @@
+version: "3.9"
+networks:
+  roboshop:
+    driver: bridge
+services:
+  web:
+    image: web:v1
+    container_name: web
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
+    - cart 
+    - mysql 
+    - shipping
+  mongodb:
+    image: nitisha2/mongodb:v1
+    container_name: mongodb
+
+  catalogue:
+    image: nitisha2/catalogue:v1
+    container_name: catalogue
+    depends_on:
+    - mongodb
+  redis:
+    image: redis
+  user:
+    image: nitisha2/user:v1
+    container_name: user
+    depends_on:
+    - mongodb
+    - redis
+  cart:
+    image: nitisha2/cart:v1
+    container_name: cart
+    depends_on:
+    - redis
+    - catalogue
+  mysql:
+    image: nitisha2/mysql:v1
+    container_name: mysql
+  shipping:
+    image: nitisha2/shipping:v1
+    container_name: shipping
+    depends_on:
+      - mysql
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+  payment:
+    image: nitisha2/payment:v1
+    container_name: pay
+    depends_on:
+      - rabbitmq
+  ratings:
+    image: nitisha2/ratings:v1
+    container_name: ratings
+    depends_on:
+      - mysql
