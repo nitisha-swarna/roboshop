@@ -1,10 +1,11 @@
 FROM node:14
 EXPOSE 8080
-RUN adduser cart
+RUN adduser --system cart
 USER cart
 WORKDIR /opt/server
+RUN chmod -R cart:cart /opt/server
 COPY package.json /opt/server/
-RUN id
+RUN ls -lrt
 RUN npm install
 
 COPY server.js /opt/server/
