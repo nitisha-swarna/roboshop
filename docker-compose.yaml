@@ -93,4 +93,3 @@ services:
     container_name: ratings
     depends_on:
     - mysql
-  
