@@ -65,7 +65,7 @@ services:
     - mongodb
     - redis
   cart:
-    image: cart:v2
+    image: cart:v1
     container_name: cart
     depends_on:
     - redis
@@ -76,7 +76,7 @@ services:
     volumes:
       -mysql:/var/lib/mysql
   shipping:
-    image: shipping:v2
+    image: shipping:v1
     container_name: shipping
     depends_on:
       - mysql
