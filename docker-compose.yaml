@@ -3,28 +3,28 @@ networks:
   roboshop:
     driver: bridge
 volumes:
-  mysql:
+   mysql:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/mysql
 volumes:
-  redis:
+   redis:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/redis
 volumes:
-  rabbitmq:
+   rabbitmq:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/rabbitmq
 volumes:
-  mongodb:
+   mongodb:
     driver: local
     driver_opts:
       o: bind
