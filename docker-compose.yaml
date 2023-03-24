@@ -10,27 +10,25 @@ volumes:
       o: bind
       type: none
       device: /home/ec2-user/mysql
-volumes:
   redis:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/redis
-volumes:
   rabbitmq:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/rabbitmq
-volumes:
   mongodb:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: /home/ec2-user/mongodb
+
 services:
   web:
     image: web:v1
@@ -40,15 +38,14 @@ services:
     depends_on:
     - catalogue
     - user
-    - cart 
-    - mysql 
+    - cart
+    - mysql
     - shipping
   mongodb:
     image: mongodb:v1
     container_name: mongodb
     volumes:
-      -mongodb:/data/db
-
+    - mongodb:/data/db
   catalogue:
     image: catalogue:v1
     container_name: catalogue
@@ -58,7 +55,7 @@ services:
     image: redis
     container_name: redis
     volumes:
-      -redis:/data
+    - redis:/data
   user:
     image: user:v1
     container_name: user
@@ -75,25 +72,25 @@ services:
     image: mysql:v1
     container_name: mysql
     volumes:
-      -mysql:/var/lib/mysql
+    - mysql:/var/lib/mysql
   shipping:
     image: shipping:v1
     container_name: shipping
     depends_on:
-      - mysql
+    - mysql
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
     volumes:
-      -rabbitmq:/var/lib/rabbitmq
+    - rabbitmq:/var/lib/rabbitmq
   payment:
     image: payment:v1
-    container_name: pay
+    container_name: payment
     depends_on:
-      - rabbitmq
+    - rabbitmq
   ratings:
     image: ratings:v1
     container_name: ratings
     depends_on:
-      - mysql
+    - mysql
   
